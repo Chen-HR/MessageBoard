@@ -1,0 +1,10 @@
+.AuthorName {
+  font-weight: bolder;
+}
+.ReleaseTime {
+  font-weight: lighter;
+  color: grey;
+}
+.ItemName-ArticleCreate {
+  width: 75px;
+}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>Article List</title>
+{% endblock %}
+
+{% block content %}
+  <div class="Content">
+    <div class="container">
+      <div class="row justify-content-center"><div class="ItemName width_minimum"><h2>Article List</h2></div></div>
+      {% for Article in ArticleList %}
+        <div class="Content Spacing-Small">
+          {% comment %} <a href="/article/{{ Article.id }}"> {% endcomment %}
+          <a href="{% url "Article" ArticleId=Article.id %}" class="Content-Link">
+            <div class="container">
+              <div class="row justify-content-between"><div class="ItemName width_minimum"><h5>{{ Article.Title }}</h5></div><div class="ReleaseTime width_minimum">{{ Article.ReleaseTime }}</div></div>
+              <div class="row justify-content-start"><div class="col-12">{{ Article.Content|cut:"\n"|escape|truncatechars:64 }}</div></div>
+            </div>
+          </a>
+        </div>
+      {% empty %} <div class="row justify-content-center"><div class="ItemName width_minimum"><spen class="Message">There are currently no articles.</spen></div></div>
+      {% endfor %}
+      
+    </div>
+  </div>
+{% endblock %}
+
+{% block debug %}
+  <div class="Content">
+    <div class="container">
+      <div class="row justify-content-start Borders"><div class="col-4">DateTime</div><div class="col-1">:</div><div class="col">{{ DateTime }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">RequestMethod</div><div class="col-1">:</div><div class="col">{{ RequestMethod }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">State</div><div class="col-1">:</div><div class="col">{{ State }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">Error</div><div class="col-1">:</div><div class="col">{{ Error|escape|linebreaks }}</div></div>
+      <hr class="dividing">
+      <div class="row justify-content-start Borders"><div class="col-4">LogingState</div><div class="col-1">:</div><div class="col">{{ LogingState }}</div></div>
+      {% if LogingState == "True" %}
+        <div class="container">
+          <div class="row justify-content-start Borders"><div class="col-4">User.Account </div><div class="col-1">:</div><div class="col">{{ User_Account  }}</div></div>
+          <div class="row justify-content-start Borders"><div class="col-4">User.Name    </div><div class="col-1">:</div><div class="col">{{ User_Name     }}</div></div>
+        </div>
+      {% endif %}
+
+      <hr class="dividing">
+      <div class="row justify-content-start Borders"><div class="col-4">ArticleList.length</div><div class="col-1">:</div><div class="col">{{ ArticleList|length }}</div></div>
+
+    </div>
+  </div>
+{% endblock %}

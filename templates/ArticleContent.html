@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>Article: {{ article.title }}</title>
+{% endblock %}
+
+{% block content %}
+<article class="Content"><!--repeat-->
+  <header class="Content">
+    <div class="Spacing">
+      <h1 class="">{{ Article.Title }}</h1>
+      <div class="container-fluid">
+        <div class="row justify-content-start">
+          <div class="AuthorName width_minimum">{{ Article.Author.Name|default:"Anonymous" }}</div>
+          <div class="ReleaseTime width_minimum">{{ Article.ReleaseTime }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="Spacing">
+      {{ Article.Content|escape|linebreaks }}
+    </div>
+  </header>
+
+  <section class="Content">
+    <form action="" method="POST" name="AddNewMessage">
+      {% csrf_token %}
+      {% comment %} <div class="container-fluid">
+        <div class="row justify-content-between">
+          <div class="AuthorName width_minimum">{{ UserName }}</div>
+          <div class="width_minimum"><input type="submit" value="submit"></div>
+        </div>
+        {{ AddNewMessage }}
+      </div> {% endcomment %}
+      <div class="input-group mb-3">
+        <span class="input-group-text ItemName width_minimum" id="inputGroup-sizing-default">Message</span>
+        {% comment %} <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" autocomplete="off"> {% endcomment %}
+        {{ MessageForm.Content }}
+        {% comment %} <button class="btn btn-outline-secondary" type="button" id="button-addon1">Button</button> {% endcomment %}
+        <div class="input-group-text ItemName width_minimum"><input class="btn btn-outline-secondary" type="submit" value="Post"></div>
+        <script>
+          document.querySelector("#id_Content").innerHTML="";
+        </script>
+      </div>
+    </form>
+  </section>
+
+  {% for Message in MessageList %}
+    <section class="Content"><!--repeat-->
+      <div class="container-fluid">
+        <div class="row justify-content-start">
+          <div class="AuthorName width_minimum">{{ Message.Author.Name|default:"Anonymous" }}</div>
+          <div class="ReleaseTime width_minimum">{{ Message.ReleaseTime }}</div>
+        </div>
+      </div>
+      <div class="Spacing">
+        {{ Message.Content|escape|linebreaks }}
+      </div>
+    </section>
+  {% empty %}
+    <div class="row justify-content-center"><div class="ItemName width_minimum"><spen class="Message">There are currently no message.</spen></div></div>
+  {% endfor %}
+
+</article>
+{% endblock %}
+
+{% block debug %}
+  <div class="Content">
+    <div class="container">
+      <div class="row justify-content-start Borders"><div class="col-4">DateTime</div><div class="col-1">:</div><div class="col">{{ DateTime }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">RequestMethod</div><div class="col-1">:</div><div class="col">{{ RequestMethod }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">State</div><div class="col-1">:</div><div class="col">{{ State }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">Error</div><div class="col-1">:</div><div class="col">{{ Error|escape|linebreaks }}</div></div>
+      <hr class="dividing">
+      <div class="row justify-content-start Borders"><div class="col-4">LogingState</div><div class="col-1">:</div><div class="col">{{ LogingState }}</div></div>
+      {% if LogingState == "True" %}
+        <div class="container">
+          <div class="row justify-content-start Borders"><div class="col-4">User.Account </div><div class="col-1">:</div><div class="col">{{ User_Account  }}</div></div>
+          <div class="row justify-content-start Borders"><div class="col-4">User.Name    </div><div class="col-1">:</div><div class="col">{{ User_Name     }}</div></div>
+        </div>
+      {% endif %}
+
+      <hr class="dividing">
+      <div class="row justify-content-start Borders"><div class="col-4">ArticleId</div><div class="col-1">:</div><div class="col">{{ ArticleId }}</div></div>
+
+      <hr class="dividing">
+      <div class="row justify-content-start Borders"><div class="col-4">MessageForm_valid</div><div class="col-1">:</div><div class="col">{{ MessageForm_valid }}</div></div>
+      {% if MessageForm_valid == "Valid" %}
+        <div class="container">
+          <div class="row justify-content-start Borders"><div class="col-4">MessageForm.Content </div><div class="col-1">:</div><div class="col">{{ MessageForm_Content  }}</div></div>
+        </div>
+      {% endif %}
+
+      <hr class="dividing">
+      <div class="row justify-content-start Borders"><div class="col-4">MessageList.length</div><div class="col-1">:</div><div class="col">{{ MessageList|length }}</div></div>
+
+    </div>
+  </div>
+{% endblock %}

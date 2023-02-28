@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC">
+    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    {% load static %}
+    <link rel="StyleSheet" type="text/css" href={% static "Base.css" %}>
+    <link rel="StyleSheet" type="text/css" href={% static "Account.css" %}>
+    <link rel="StyleSheet" type="text/css" href={% static "Article.css" %}>
+    {% block title %}{% endblock %}
+  </head>
+  <body>
+    <nav class="navbar navbar-expand">
+      <div class="container-fluid" style="background-color: #e3f2fd;">
+        <a href="/" class="navbar-brand">
+          <!-- <img alt="logo.svg" width="30" height="30" src="/logo.svg"> -->
+          <span class="mx-2">MessageBoard</span>
+        </a>
+        <div class="d-flex" style="width: max-content; margin-left: inherit;">
+          <a href="/" id="" class="nav-link">Home</a>
+          <!-- <a href="/article/list" id="" class="nav-link">article list</a> -->
+          <a href="/article/create" id="" class="nav-link">New Article</a>
+          <a href="/account/signup" id="" class="nav-link">Sign up</a>
+          {% if LogingState == "True" %}
+            <a href="/account/logout" id="" class="nav-link">Logout</a>
+            <a href="/account/logout" id="username" class="nav-link"><b>{{ User_Name }}</b></a>
+          {% elif LogingState == "False" %}
+            <a href="/account/login" id="" class="nav-link">Login</a>
+            <a href="/account/login" id="username" class="nav-link"><b>Anonymous</b></a>
+          {% endif %}
+          </b></a>
+        </div>
+      <div></div>
+    </nav>
+    {% block content %} {% endblock %}
+    <!-- {% block debug %} {% endblock %} -->
+  </body>
+</html>

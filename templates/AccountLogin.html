@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Sign up</title>
+{% endblock %}
+
+{% block content %}
+  <div class="Content">
+    <div class="container">
+      <form id="apply" action="" method="POST" name="AccountLogin">
+        {% csrf_token %}
+        <div class="row justify-content-center"><div class="ItemName width_minimum"><h2>Login</h2></div></div>
+        {% if LogingState == "True" %}
+          {% if RequestMethod == "POST" and LogingState_old == "False" %}
+            {% comment %} <p>Successfully logged into the account <b>{{ Account }}</b></p> {% endcomment %}
+            <div class="row justify-content-center"><div class="ItemName width_minimum"><spen class="Message">Successfully logged into the account "<b>{{ User_Account }}</b>".</spen></div></div>
+          {% else %}
+            {% comment %} <p>Please log out of the current account first.</p> {% endcomment %}
+            <div class="row justify-content-center"><div class="ItemName width_minimum"><spen class="Message">Please log out of the current account "<b>{{ User_Account }}</b>" first.</spen></div></div>
+          {% endif %}
+        {% else %}
+          <div class="Spacing-Small">
+            <div class="input-group"><span class="input-group-text ItemName ItemName-AccountLogin" id="inputGroup-sizing-default">Account             </span>{{ LoginForm.Account    }}</div>
+            <hr class="dividing">
+            <div class="input-group"><span class="input-group-text ItemName ItemName-AccountLogin" id="inputGroup-sizing-default">Password            </span>{{ LoginForm.Password   }}</div>
+          </div>
+          <div class="container width_minimum">
+            <div class="row justify-content-center"><div class="ItemName"><input type="submit" value="Login"></div></div>
+            {% if ErrorMessage_Submit %}
+              <div class="row justify-content-center"><div class="ItemName width_minimum"><spen class="ErrorMessage">{{ ErrorMessage_Submit }}</spen></div></div>
+            {% endif %}
+          </div>
+        {% endif %}
+        <script>
+          document.querySelector("#id_Password").setAttribute("type", "password");
+          document.querySelector("#id_Account") .setAttribute("class", "form-control");
+          document.querySelector("#id_Password").setAttribute("class", "form-control");
+        </script>
+      </form>
+    </div>
+  </div>
+
+  {% comment %} <div>
+    <form id="apply" class="account-form" action="" method="POST" name="Account_Login">
+      {% csrf_token %}
+      <h2>Login</h2>
+      {% if LogingState == "True" %}
+        {% if RequestMethod == "POST" and LogingState_old == "False" %}
+          <p>Successfully logged into the account <b>{{ Account }}</b></p>
+        {% else %}
+          <p>Please log out of the current account first.</p>
+        {% endif %}
+      {% elif LogingState == "False" %}
+        <table>
+          <tr><td>Account:</td><td>{{LoginForm.Account}}</td></tr>
+          <tr><td>Password:</td><td>{{LoginForm.Password}}</td></tr>
+        </table>
+        <script>
+          document.querySelector("#id_Password").setAttribute("type", "password");
+        </script>
+        {% if ErrorMessage_Submit %}
+          <p style="color:red;">{{ ErrorMessage_Submit }}</p>
+        {% endif %}
+        <input type="submit" value="Log in">
+      {% else %}
+        <p style="color:red;">Error</p>
+      {% endif %}
+    </form>
+  </div> {% endcomment %}
+{% endblock %}
+
+{% block debug %}
+  <div class="Content">
+    <div class="container">
+      <div class="row justify-content-start Borders"><div class="col-4">DateTime</div><div class="col-1">:</div><div class="col">{{ DateTime }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">RequestMethod</div><div class="col-1">:</div><div class="col">{{ RequestMethod }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">State</div><div class="col-1">:</div><div class="col">{{ State }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">Error</div><div class="col-1">:</div><div class="col">{{ Error|escape|linebreaks }}</div></div>
+      <hr class="dividing">
+      <div class="row justify-content-start Borders"><div class="col-4">LogingState</div><div class="col-1">:</div><div class="col">{{ LogingState }}</div></div>
+      {% if LogingState == "True" %}
+        <div class="container">
+          <div class="row justify-content-start Borders"><div class="col-4">User.Account </div><div class="col-1">:</div><div class="col">{{ User_Account  }}</div></div>
+          <div class="row justify-content-start Borders"><div class="col-4">User.Name    </div><div class="col-1">:</div><div class="col">{{ User_Name     }}</div></div>
+        </div>
+      {% endif %}
+
+      <hr class="dividing">
+      <div class="row justify-content-start Borders"><div class="col-4">LoginForm_valid</div><div class="col-1">:</div><div class="col">{{ LoginForm_valid }}</div></div>
+      {% if LoginForm_valid == "Valid" %}
+        <div class="container">
+          <div class="row justify-content-start Borders"><div class="col-4">LoginForm.Account </div><div class="col-1">:</div><div class="col">{{ LoginForm_Account  }}</div></div>
+          <div class="row justify-content-start Borders"><div class="col-4">LoginForm.Password</div><div class="col-1">:</div><div class="col">{{ LoginForm_Password }}</div></div>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+{% endblock %}

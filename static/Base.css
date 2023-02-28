@@ -1,0 +1,64 @@
+.width_minimum {
+  width: fit-content;
+}
+.Borders,
+.Content {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.Spacing,
+.Content {
+  margin: 10px;
+  padding: 10px;
+}
+.Spacing-Small {
+  margin: 5px;
+  padding: 5px;
+}
+hr.dividing {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 0px;
+}
+
+.Content-Link {
+  display: block;
+  text-decoration: none;
+  color: black;
+}
+
+.ItemName {
+  justify-content: center;
+}
+.Message {
+  color: black;
+}
+.ErrorMessage {
+  color: red;
+}
+
+input[type="button"],
+input[type="submit"]{
+  padding: 14px 20px;
+  margin: 8px 0;
+}
+input[type="button"],
+input[type="submit"], 
+a.nav-link {
+  color: #110dfd;
+}
+input[type="button"],
+input[type="submit"], 
+a.nav-link, 
+.Content-Link {
+  background-color: #E3F2FD;
+  border: none;
+  border-radius: 4px;
+}
+input[type="button"]:hover,
+input[type="submit"]:hover, 
+a.nav-link:hover,
+.Content-Link:hover {
+  background-color: #43d8fa;
+}
+

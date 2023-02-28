@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>Create new Article</title>
+{% endblock %}
+
+{% block content %}
+  <article class="Content"><!--repeat-->
+    <form action="" method="POST" name="ArticleForm">
+      {% csrf_token %}
+      <header class="Spacing-Small">
+        <div class="input-group input-group-lg">
+          <span class="input-group-text" id="inputGroup-sizing-lg" style="width: 75px; justify-content: center;">Title</span>
+          {% comment %} <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"> {% endcomment %}
+          {{ ArticleForm.Title }}
+        </div>
+      </header>
+      <div class="Spacing-Small">
+        <div class="input-group">
+          <span class="input-group-text" id="inputGroup-sizing-default" style="width: 75px; justify-content: center;">Content</span>
+          {% comment %} <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"> {% endcomment %}
+          {{ ArticleForm.Content }}
+        </div>
+      </div>
+      <div class="row justify-content-end Spacing-Small">
+        <div class="width_minimum">
+          <input type="submit" value="Post">
+        </div>
+      </div>
+    </form>
+  </article>
+{% endblock %}
+
+{% block debug %}
+  <div class="Content">
+    <div class="container">
+      <div class="row justify-content-start Borders"><div class="col-4">DateTime</div><div class="col-1">:</div><div class="col">{{ DateTime }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">RequestMethod</div><div class="col-1">:</div><div class="col">{{ RequestMethod }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">State</div><div class="col-1">:</div><div class="col">{{ State }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">Error</div><div class="col-1">:</div><div class="col">{{ Error|escape|linebreaks }}</div></div>
+      <hr class="dividing">
+      <div class="row justify-content-start Borders"><div class="col-4">LogingState</div><div class="col-1">:</div><div class="col">{{ LogingState }}</div></div>
+      {% if LogingState == "True" %}
+        <div class="container">
+          <div class="row justify-content-start Borders"><div class="col-4">User.Account </div><div class="col-1">:</div><div class="col">{{ User_Account  }}</div></div>
+          <div class="row justify-content-start Borders"><div class="col-4">User.Name    </div><div class="col-1">:</div><div class="col">{{ User_Name     }}</div></div>
+        </div>
+      {% endif %}
+      <hr class="dividing">
+      <div class="row justify-content-start Borders"><div class="col-4">ArticleForm_valid</div><div class="col-1">:</div><div class="col">{{ ArticleForm_valid }}</div></div>
+      {% if LogingState == "True" %}
+        <div class="container">
+          <div class="row justify-content-start Borders"><div class="col-4">ArticleForm.Title  </div><div class="col-1">:</div><div class="col">{{ ArticleForm_Title   }}</div></div>
+          <div class="row justify-content-start Borders"><div class="col-4">ArticleForm.Content</div><div class="col-1">:</div><div class="col">{{ ArticleForm_Content }}</div></div>
+        </div>
+      {% endif %}
+      <hr class="dividing">
+      <div class="row justify-content-start Borders"><div class="col-4">Article_valid</div><div class="col-1">:</div><div class="col">{{ ArticleForm_valid }}</div></div>
+      {% if Article_valid == "Valid" %}
+        <div class="container">
+          <div class="row justify-content-start Borders"><div class="col-4">Article.Title  </div><div class="col-1">:</div><div class="col">{{ ArticleForm_Title   }}</div></div>
+          <div class="row justify-content-start Borders"><div class="col-4">Article.Content</div><div class="col-1">:</div><div class="col">{{ ArticleForm_Content }}</div></div>
+          <div class="row justify-content-start Borders"><div class="col-4">Article.Author </div><div class="col-1">:</div><div class="col">{{ Article_Author.Account }}:{{ Article_Author.Password }} as {{ Article_Author.Name }}</div></div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

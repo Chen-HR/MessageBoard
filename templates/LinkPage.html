@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Guide</title>
+{% endblock %}
+
+{% block content %}
+  {% comment %} <h1>Guide</h1> {% endcomment %}
+  <div class="Content">
+    <h3>admin</h3>
+    <ol>
+      <li><a href="/admin/">/admin/</a></li>
+    </ol>
+    <h3>account</h3>
+    <ol>
+      <li><a href="/account/signup">/account/signup</a></li>
+      <li><a href="/account/login">/account/login</a></li>
+      <li><a href="/account/logout">/account/logout</a></li>
+    </ol>
+    <h3>article</h3>
+    <ol>
+      <li><a href="/article/create">/article/create</a></li>
+      <li><a href="/article/list">/article/list</a></li>
+      {% comment %} <li><a href="/article/content/<int:ArticleId>">/article/content/<int:ArticleId></a></li> {% endcomment %}
+      <li><a href="/article/<int:ArticleId>">/article/<int:ArticleId></a></li>
+    </ol>
+    <h3>static</h3>
+    <ol>
+      <li><a href="/static/Base.css">/static/Base.css</a></li>
+      <li><a href="/static/Account.css">/static/Account.css</a></li>
+      <li><a href="/static/Article.css">/static/Article.css</a></li>
+    </ol>
+  </div>
+{% endblock %}
+
+{% block debug %}
+  <div class="Content">
+    <div class="container">
+      <div class="row justify-content-start Borders"><div class="col-4">DateTime</div><div class="col-1">:</div><div class="col">{{ DateTime }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">RequestMethod</div><div class="col-1">:</div><div class="col">{{ RequestMethod }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">State</div><div class="col-1">:</div><div class="col">{{ State }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">Error</div><div class="col-1">:</div><div class="col">{{ Error|escape|linebreaks }}</div></div>
+      <hr class="dividing">
+      <div class="row justify-content-start Borders"><div class="col-4">LogingState</div><div class="col-1">:</div><div class="col">{{ LogingState }}</div></div>
+      {% if LogingState == "True" %}
+        <div class="container">
+          <div class="row justify-content-start Borders"><div class="col-4">User.Account </div><div class="col-1">:</div><div class="col">{{ User_Account  }}</div></div>
+          <div class="row justify-content-start Borders"><div class="col-4">User.Name    </div><div class="col-1">:</div><div class="col">{{ User_Name     }}</div></div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

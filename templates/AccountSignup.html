@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Sign up</title>
+{% endblock %}
+
+{% block content %}
+  <div class="Content">
+    <div class="container">
+      <form id="apply" action="" method="POST" name="AccountSignup">
+        {% csrf_token %}
+        <div class="row justify-content-center"><div class="ItemName width_minimum"><h2>Sign up</h2></div></div>
+        <div class="Spacing-Small">
+          <div class="input-group"><span class="input-group-text ItemName ItemName-AccountSignup" id="inputGroup-sizing-default">Account             </span>{{ SignupForm.Account    }}</div>
+          {% if ErrorMessage_Account %}
+            <spen class="ErrorMessage ErrorMessage-AccountSignup">{{ ErrorMessage_Account }}</spen>
+          {% endif %}
+          <hr class="dividing">
+          <div class="input-group"><span class="input-group-text ItemName ItemName-AccountSignup" id="inputGroup-sizing-default">Password            </span>{{ SignupForm.Password   }}</div>
+          <div class="input-group"><span class="input-group-text ItemName ItemName-AccountSignup" id="inputGroup-sizing-default">Enter Password Again</span>{{ SignupForm.RePassword }}</div>
+          {% if ErrorMessage_Password %}
+            <spen class="ErrorMessage ErrorMessage-AccountSignup">{{ ErrorMessage_Password }}</spen>
+          {% endif %}
+          <hr class="dividing">
+          <div class="input-group"><span class="input-group-text ItemName ItemName-AccountSignup" id="inputGroup-sizing-default">Name                </span>{{ SignupForm.Name       }}</div><hr class="dividing">
+          <div class="input-group"><span class="input-group-text ItemName ItemName-AccountSignup" id="inputGroup-sizing-default">Phone               </span>{{ SignupForm.Phone      }}</div><hr class="dividing">
+          <div class="input-group"><span class="input-group-text ItemName ItemName-AccountSignup" id="inputGroup-sizing-default">Email               </span>{{ SignupForm.Email      }}</div>
+        </div>
+        <div class="container width_minimum">
+          <div class="row justify-content-center"><div class="ItemName"><input type="submit" value="Sign up"></div></div>
+          {% if ErrorMessage_Submit %}
+            <div class="row justify-content-center"><div class="ItemName width_minimum"><spen class="ErrorMessage">{{ ErrorMessage_Submit }}</spen></div></div>
+          {% endif %}
+        </div>
+        <script>
+          document.querySelector("#id_Password")  .setAttribute("type", "password");
+          document.querySelector("#id_RePassword").setAttribute("type", "password");
+          document.querySelector("#id_Phone")     .setAttribute("type", "tel");
+          document.querySelector("#id_Account")   .setAttribute("class", "form-control");
+          document.querySelector("#id_Password")  .setAttribute("class", "form-control");
+          document.querySelector("#id_RePassword").setAttribute("class", "form-control");
+          document.querySelector("#id_Name")      .setAttribute("class", "form-control");
+          document.querySelector("#id_Phone")     .setAttribute("class", "form-control");
+          document.querySelector("#id_Email")     .setAttribute("class", "form-control");
+        </script>
+      </form>
+    </div>
+  </div>
+
+  {% comment %} <div>
+    <form id="apply" class="account-form" action="" method="POST" name="Account_Signup">
+      {% csrf_token %}
+      
+      <h2>Sign up</h2>
+      <table>
+        <tr><td>Account:</td><td>{{SignupForm.Account}}</td></tr>
+        {% if ErrorMessage_Account %}
+          <tr style="color:red;"><td></td><td>{{ ErrorMessage_Account }}</td></tr>
+        {% endif %}
+        <tr><td>Password:</td><td>{{SignupForm.Password}}</td></tr>
+        <tr><td>Enter Password Again:</td><td>{{SignupForm.RePassword}}</td></tr>
+        {% if ErrorMessage_Password %}
+          <tr style="color:red;"><td></td><td>{{ ErrorMessage_Password }}</td></tr>
+        {% endif %}
+        <tr><td>Name:</td><td>{{SignupForm.Name}}</td></tr>
+        <tr><td>Phone:</td><td>{{SignupForm.Phone}}</td></tr>
+        <tr><td>Email:</td><td>{{SignupForm.Email}}</td></tr>
+      </table>
+      <script>
+        document.querySelector("#id_Password").setAttribute("type", "password");
+        document.querySelector("#id_RePassword").setAttribute("type", "password");
+        document.querySelector("#id_Phone").setAttribute("type", "tel");
+      </script>
+      {% if ErrorMessage_Submit %}
+        <p style="color:red;">{{ ErrorMessage_Submit }}</p>
+      {% endif %}
+      <input type="submit" value="Sign up">
+    </form>
+  </div> {% endcomment %}
+{% endblock %}
+
+{% block debug %}
+  <div class="Content">
+    <div class="container">
+      <div class="row justify-content-start Borders"><div class="col-4">DateTime</div><div class="col-1">:</div><div class="col">{{ DateTime }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">RequestMethod</div><div class="col-1">:</div><div class="col">{{ RequestMethod }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">State</div><div class="col-1">:</div><div class="col">{{ State }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">Error</div><div class="col-1">:</div><div class="col">{{ Error|escape|linebreaks }}</div></div>
+      <hr class="dividing">
+      <div class="row justify-content-start Borders"><div class="col-4">LogingState</div><div class="col-1">:</div><div class="col">{{ LogingState }}</div></div>
+      {% if LogingState == "True" %}
+        <div class="container">
+          <div class="row justify-content-start Borders"><div class="col-4">User.Account </div><div class="col-1">:</div><div class="col">{{ User_Account  }}</div></div>
+          <div class="row justify-content-start Borders"><div class="col-4">User.Name    </div><div class="col-1">:</div><div class="col">{{ User_Name     }}</div></div>
+        </div>
+      {% endif %}
+
+      <hr class="dividing">
+      <div class="row justify-content-start Borders"><div class="col-4">SignupForm_valid</div><div class="col-1">:</div><div class="col">{{ SignupForm_valid }}</div></div>
+      {% if SignupForm_valid == "Valid" %}
+        <div class="container">
+          <div class="row justify-content-start Borders"><div class="col-4">SignupForm.Account </div><div class="col-1">:</div><div class="col">{{ SignupForm_Account  }}</div></div>
+          <div class="row justify-content-start Borders"><div class="col-4">SignupForm.Password</div><div class="col-1">:</div><div class="col">{{ SignupForm_Password }}</div></div>
+          <div class="row justify-content-start Borders"><div class="col-4">SignupForm.Name    </div><div class="col-1">:</div><div class="col">{{ SignupForm_Name     }}</div></div>
+          <div class="row justify-content-start Borders"><div class="col-4">SignupForm.Phone   </div><div class="col-1">:</div><div class="col">{{ SignupForm_Phone    }}</div></div>
+          <div class="row justify-content-start Borders"><div class="col-4">SignupForm.Email   </div><div class="col-1">:</div><div class="col">{{ SignupForm_Email    }}</div></div>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+{% endblock %}

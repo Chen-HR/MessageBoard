@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Sign up</title>
+{% endblock %}
+
+{% block content %}
+  <div class="Content">
+    <div class="container">
+      <form id="apply" action="" method="POST" name="AccountLogout">
+        {% csrf_token %}
+        <div class="row justify-content-center"><div class="ItemName width_minimum"><h2>Logout</h2></div></div>
+        {% if LogingState == "True" %}
+          <div class="row justify-content-center"><div class="ItemName width_minimum"><spen class="Message">Click the button below to log out of the current account "<b>{{ User_Account }}</b>".</spen></div></div>
+          <div class="row justify-content-center"><div class="ItemName width_minimum"><input type="submit" value="Logout"></div></div>
+        {% else %}
+          {% if LogingState_old == "True" %}
+            <div class="row justify-content-center"><div class="ItemName width_minimum"><spen class="Message">Currently logged out of account "<b>{{ User_Account_old }}</b>".</spen></div></div>
+          {% else %}
+            <div class="row justify-content-center"><div class="ItemName width_minimum"><spen class="Message">Not currently logged in to any account.</spen></div></div>
+          {% endif %}
+        {% endif %}
+      </form>
+    </div>
+  </div>
+  {% comment %} <div>
+    <form id="apply" class="account-form" action="" method="POST" name="Account_Logout">
+      {% csrf_token %}
+      <h2>Logout</h2>
+      {% if LogingState == "True" %}
+        <p>Click the button below to log out of the current account.</p>
+        <input type="submit" value="Log out">
+      {% elif LogingState == "False" %}
+        <p>Not currently logged in to any account.</p>
+      {% else %}
+        <p style="color:red;">Error</p>
+      {% endif %}
+    </form>
+  </div> {% endcomment %}
+{% endblock %}
+
+{% block debug %}
+  <div class="Content">
+    <div class="container">
+      <div class="row justify-content-start Borders"><div class="col-4">DateTime</div><div class="col-1">:</div><div class="col">{{ DateTime }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">RequestMethod</div><div class="col-1">:</div><div class="col">{{ RequestMethod }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">State</div><div class="col-1">:</div><div class="col">{{ State }}</div></div>
+      <div class="row justify-content-start Borders"><div class="col-4">Error</div><div class="col-1">:</div><div class="col">{{ Error|escape|linebreaks }}</div></div>
+      <hr class="dividing">
+      <div class="row justify-content-start Borders"><div class="col-4">LogingState</div><div class="col-1">:</div><div class="col">{{ LogingState }}</div></div>
+      {% if LogingState == "True" %}
+        <div class="container">
+          <div class="row justify-content-start Borders"><div class="col-4">User.Account </div><div class="col-1">:</div><div class="col">{{ User_Account  }}</div></div>
+          <div class="row justify-content-start Borders"><div class="col-4">User.Name    </div><div class="col-1">:</div><div class="col">{{ User_Name     }}</div></div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

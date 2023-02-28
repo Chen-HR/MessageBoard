@@ -1,0 +1,52 @@
+.account-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+/* .account-form input[type="text"], */
+/* .account-form input[type="password"], */
+/* .account-form input[type="tel"], */
+/* .account-form input[type="email"], */
+.account-form>table>tr>td>input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.account-form>input[type="button"],
+.account-form>input[type="submit"] {
+  width: 100%;
+  /* background-color: #888888; */
+  background-color: #E3F2FD;
+  /* color: white; */
+  color: #110dfd;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.account-form>input[type="button"]:hover,
+.account-form>input[type="submit"]:hover {
+  background-color: #43aefa;
+}
+
+.ItemName-AccountSignup {
+  width: 175px;
+}
+.ErrorMessage-AccountSignup {
+  margin-left: 175px;
+}
+.ItemName-AccountLogin {
+  width: 100px;
+}
+.ErrorMessage-AccountLogin {
+  margin-left: 100px;
+}
